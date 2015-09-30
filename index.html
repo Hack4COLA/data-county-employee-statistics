@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+		<script>
+
+		$.getJSON("https://data.lacounty.gov/resource/sjq9-bcke.json", function(data) {
+			var items = [];
+			$.each(data, function(key, value) {
+				items.push(value);
+			});
+			
+			var femaleCount = 0;
+			var maleCount = 0;
+
+			$.each(items, function() {
+
+				if (this.department_code == 'AD') {
+					if (this.gender_code == "M") {
+						maleCount += parseInt(this.employee_count);
+					} else if (this.gender_code == "F") {
+						femaleCount += parseInt(this.employee_count);
+					}
+				}
+			});
+
+			$("<p>females: " + femaleCount + ", males: " + maleCount + "</p>").appendTo("body");
+		});
+
+
+
+		</script>
+</head>
+	<body>
+		<ul>
+
+	</body>
+</html>
